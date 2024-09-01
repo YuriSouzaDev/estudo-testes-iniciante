@@ -1,0 +1,45 @@
+npm create vite@latest .
+npm i
+npm i jest -D
+npx jest --init
+npm i ts-node -D
+npm i @types/jest -D
+npm i @swc/core @swc/jest -D
+npm install -D jest-environment-jsdom
+npm i @testing-library/jest-dom @testing-library/react @testing-library/user-event -D
+
+Coloque no arquivo jest.config.ts
+// A map from regular expressions to paths to transformers
+  transform: {
+    '^.+\\.(t|j)sx?$': [
+      '@swc/jest',
+      {
+        jsc: {
+          parser: {
+            syntax: 'typescript',
+            tsx: true,
+            decorators: true,
+          },
+          keepClassNames: true,
+          transform: {
+            legacyDecorator: true,
+            decoratorMetadata: true,
+            react: {
+              runtime: 'automatic',
+            },
+          },
+        },
+        module: {
+          type: 'es6',
+          noInterop: false,
+        },
+      },
+    ],
+  },
+
+// Criar um arquivo chamado test/jest.setup.ts na pasta src e inserir o codigo
+import '@testing-library/jest-dom';
+
+detro de jest.config.ts
+  // A list of paths to modules that run some code to configure or set up the testing framework before each test
+  setupFilesAfterEnv: ['<rootDir>/src//test/jest.setup.ts'],

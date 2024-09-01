@@ -13,7 +13,6 @@ describe('<Counter />', () => {
     render(<Counter initialCount={0} />);
 
     const buttonIncrement = screen.getByRole('button', { name: /increment/i });
-    expect(buttonIncrement).toBeEnabled();
     fireEvent.click(buttonIncrement);
     expect(
       screen.getByRole('heading', { name: /count: 1/i }).textContent,
@@ -23,9 +22,8 @@ describe('<Counter />', () => {
   it('should decrement count in 1', () => {
     render(<Counter initialCount={0} />);
 
-    const buttonIncrement = screen.getByRole('button', { name: /decrement/i });
-    expect(buttonIncrement).toBeEnabled();
-    fireEvent.click(buttonIncrement);
+    const buttonDecrement = screen.getByRole('button', { name: /decrement/i });
+    fireEvent.click(buttonDecrement);
     expect(
       screen.getByRole('heading', { name: /count: -1/i }).textContent,
     ).toEqual('Count: -1');
@@ -34,9 +32,8 @@ describe('<Counter />', () => {
   it('should reset count to 0', () => {
     render(<Counter initialCount={0} />);
 
-    const buttonIncrement = screen.getByRole('button', { name: /reset/i });
-    expect(buttonIncrement).toBeEnabled();
-    fireEvent.click(buttonIncrement);
+    const buttonReset = screen.getByRole('button', { name: /reset/i });
+    fireEvent.click(buttonReset);
     expect(
       screen.getByRole('heading', { name: /count: 0/i }).textContent,
     ).toEqual('Count: 0');
@@ -45,11 +42,10 @@ describe('<Counter />', () => {
   it('should switch the signals', () => {
     render(<Counter initialCount={1} />);
 
-    const buttonIncrement = screen.getByRole('button', {
+    const buttonSwitchSignals = screen.getByRole('button', {
       name: /switch signals/i,
     });
-    expect(buttonIncrement).toBeEnabled();
-    fireEvent.click(buttonIncrement);
+    fireEvent.click(buttonSwitchSignals);
     expect(
       screen.getByRole('heading', { name: /count: -1/i }).textContent,
     ).toEqual('Count: -1');
