@@ -1,0 +1,1 @@
+npm i -D jest jest-environment-jsdom @testing-library/react @testing-library/jest-dom ts-jest @types/jest @testing-library/user-event

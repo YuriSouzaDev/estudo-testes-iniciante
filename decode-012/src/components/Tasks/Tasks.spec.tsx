@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { fireEvent, render } from '@testing-library/react';
 import axios from 'axios';
 import Tasks from './Tasks';
@@ -7,10 +8,8 @@ const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('Tasks Component', () => {
   it('should fetch and show tasks on button click', async () => {
-    const mockTasks = [
-      { id: 1, title: 'delectus aut autem' },
-      { id: 2, title: 'quis ut nam facilis et officia qui' },
-    ];
+    const title = faker.person.jobTitle();
+    const mockTasks = [{ id: faker.number.int(), title }];
     mockedAxios.get.mockResolvedValue({ data: mockTasks });
 
     const { getByText, findByText } = render(<Tasks />);
@@ -18,6 +17,6 @@ describe('Tasks Component', () => {
     const button = getByText('Get tasks from API');
     fireEvent.click(button);
 
-    await findByText(/delectus aut autem/i);
+    await findByText(title);
   });
 });
